@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ARMdatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Extract">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Servise" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+    <Property Name="price" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="With_privilege" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+    <Property Name="id_renter" Type="Int32" />
+    <NavigationProperty Name="Servis" Relationship="ARMdatabaseModel.ExtractServis" FromRole="Extract" ToRole="Servis" />
+    <NavigationProperty Name="Renter" Relationship="ARMdatabaseModel.RenterExtract" FromRole="Extract" ToRole="Renter" />
+    <Property Name="RenterId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Privilege">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+    <Property Name="Procent" Type="Double" />
+    <Property Name="id_renter" Type="Int32" />
+    <NavigationProperty Name="Renter" Relationship="ARMdatabaseModel.RenterPrivilege" FromRole="Privilege" ToRole="Renter" />
+    <Property Name="RenterId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Renter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="F_name" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+    <Property Name="L_name" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+    <Property Name="Adres" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+    <Property Name="Privileges" Type="Boolean" />
+    <Property Name="Debtor" Type="Boolean" />
+    <NavigationProperty Name="Privileges1" Relationship="ARMdatabaseModel.RenterPrivilege" FromRole="Renter" ToRole="Privilege" />
+    <NavigationProperty Name="Extracts" Relationship="ARMdatabaseModel.RenterExtract" FromRole="Renter" ToRole="Extract" />
+  </EntityType>
+  <EntityType Name="Servis">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="RenterId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Extract" Relationship="ARMdatabaseModel.ExtractServis" FromRole="Servis" ToRole="Extract" />
+    <Property Name="ExtractId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ARMdatabaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Extracts" EntityType="Self.Extract" />
+    <EntitySet Name="Privileges" EntityType="Self.Privilege" />
+    <EntitySet Name="Renters" EntityType="Self.Renter" />
+    <EntitySet Name="Servises" EntityType="Self.Servis" />
+    <AssociationSet Name="RenterPrivilege" Association="ARMdatabaseModel.RenterPrivilege">
+      <End Role="Renter" EntitySet="Renters" />
+      <End Role="Privilege" EntitySet="Privileges" />
+    </AssociationSet>
+    <AssociationSet Name="ExtractServis" Association="ARMdatabaseModel.ExtractServis">
+      <End Role="Extract" EntitySet="Extracts" />
+      <End Role="Servis" EntitySet="Servises" />
+    </AssociationSet>
+    <AssociationSet Name="RenterExtract" Association="ARMdatabaseModel.RenterExtract">
+      <End Role="Renter" EntitySet="Renters" />
+      <End Role="Extract" EntitySet="Extracts" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="RenterPrivilege">
+    <End Type="ARMdatabaseModel.Renter" Role="Renter" Multiplicity="1" />
+    <End Type="ARMdatabaseModel.Privilege" Role="Privilege" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Renter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Privilege">
+        <PropertyRef Name="RenterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExtractServis">
+    <End Type="ARMdatabaseModel.Extract" Role="Extract" Multiplicity="1" />
+    <End Type="ARMdatabaseModel.Servis" Role="Servis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Extract">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Servis">
+        <PropertyRef Name="ExtractId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RenterExtract">
+    <End Type="ARMdatabaseModel.Renter" Role="Renter" Multiplicity="1" />
+    <End Type="ARMdatabaseModel.Extract" Role="Extract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Renter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Extract">
+        <PropertyRef Name="RenterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

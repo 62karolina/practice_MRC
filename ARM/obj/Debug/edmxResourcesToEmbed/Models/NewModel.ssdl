@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ARMdatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Extracts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Servise" Type="nchar" MaxLength="150" />
+    <Property Name="price" Type="nchar" MaxLength="10" />
+    <Property Name="With_privilege" Type="nchar" MaxLength="150" />
+    <Property Name="id_renter" Type="int" />
+    <Property Name="RenterId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Privileges">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="150" />
+    <Property Name="Procent" Type="float" />
+    <Property Name="id_renter" Type="int" />
+    <Property Name="RenterId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Renters">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="F_name" Type="nchar" MaxLength="150" />
+    <Property Name="Name" Type="nchar" MaxLength="150" />
+    <Property Name="L_name" Type="nchar" MaxLength="150" />
+    <Property Name="Adres" Type="nchar" MaxLength="150" />
+    <Property Name="Privileges" Type="bit" />
+    <Property Name="Debtor" Type="bit" />
+  </EntityType>
+  <EntityType Name="Servises">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="150" />
+    <Property Name="Price" Type="decimal" Precision="19" Scale="4" />
+    <Property Name="RenterId" Type="int" Nullable="false" />
+    <Property Name="ExtractId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ExtractServis">
+    <End Role="Extracts" Type="Self.Extracts" Multiplicity="1" />
+    <End Role="Servises" Type="Self.Servises" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Extracts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Servises">
+        <PropertyRef Name="ExtractId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RenterExtract">
+    <End Role="Renters" Type="Self.Renters" Multiplicity="1" />
+    <End Role="Extracts" Type="Self.Extracts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Renters">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Extracts">
+        <PropertyRef Name="RenterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RenterPrivilege">
+    <End Role="Renters" Type="Self.Renters" Multiplicity="1" />
+    <End Role="Privileges" Type="Self.Privileges" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Renters">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Privileges">
+        <PropertyRef Name="RenterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ARMdatabaseModelStoreContainer">
+    <EntitySet Name="Extracts" EntityType="Self.Extracts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Privileges" EntityType="Self.Privileges" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Renters" EntityType="Self.Renters" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Servises" EntityType="Self.Servises" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ExtractServis" Association="Self.FK_ExtractServis">
+      <End Role="Extracts" EntitySet="Extracts" />
+      <End Role="Servises" EntitySet="Servises" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RenterExtract" Association="Self.FK_RenterExtract">
+      <End Role="Renters" EntitySet="Renters" />
+      <End Role="Extracts" EntitySet="Extracts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RenterPrivilege" Association="Self.FK_RenterPrivilege">
+      <End Role="Renters" EntitySet="Renters" />
+      <End Role="Privileges" EntitySet="Privileges" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

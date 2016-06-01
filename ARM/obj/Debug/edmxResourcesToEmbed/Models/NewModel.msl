@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ARMdatabaseModelStoreContainer" CdmEntityContainer="ARMdatabaseEntities">
+    <EntitySetMapping Name="Extracts">
+      <EntityTypeMapping TypeName="IsTypeOf(ARMdatabaseModel.Extract)">
+        <MappingFragment StoreEntitySet="Extracts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Servise" ColumnName="Servise" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="With_privilege" ColumnName="With_privilege" />
+          <ScalarProperty Name="id_renter" ColumnName="id_renter" />
+          <ScalarProperty Name="RenterId" ColumnName="RenterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Privileges">
+      <EntityTypeMapping TypeName="IsTypeOf(ARMdatabaseModel.Privilege)">
+        <MappingFragment StoreEntitySet="Privileges">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Procent" ColumnName="Procent" />
+          <ScalarProperty Name="id_renter" ColumnName="id_renter" />
+          <ScalarProperty Name="RenterId" ColumnName="RenterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Renters">
+      <EntityTypeMapping TypeName="IsTypeOf(ARMdatabaseModel.Renter)">
+        <MappingFragment StoreEntitySet="Renters">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="F_name" ColumnName="F_name" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="L_name" ColumnName="L_name" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Privileges" ColumnName="Privileges" />
+          <ScalarProperty Name="Debtor" ColumnName="Debtor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Servises">
+      <EntityTypeMapping TypeName="IsTypeOf(ARMdatabaseModel.Servis)">
+        <MappingFragment StoreEntitySet="Servises">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="RenterId" ColumnName="RenterId" />
+          <ScalarProperty Name="ExtractId" ColumnName="ExtractId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ARMdatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Extracts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Servise" Type="nchar" MaxLength="150" />
+          <Property Name="price" Type="nchar" MaxLength="10" />
+          <Property Name="With_privilege" Type="nchar" MaxLength="150" />
+          <Property Name="id_renter" Type="int" />
+          <Property Name="RenterId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Privileges">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="150" />
+          <Property Name="Procent" Type="float" />
+          <Property Name="id_renter" Type="int" />
+          <Property Name="RenterId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Renters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="F_name" Type="nchar" MaxLength="150" />
+          <Property Name="Name" Type="nchar" MaxLength="150" />
+          <Property Name="L_name" Type="nchar" MaxLength="150" />
+          <Property Name="Adres" Type="nchar" MaxLength="150" />
+          <Property Name="Privileges" Type="bit" />
+          <Property Name="Debtor" Type="bit" />
+        </EntityType>
+        <EntityType Name="Servises">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="150" />
+          <Property Name="Price" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="RenterId" Type="int" Nullable="false" />
+          <Property Name="ExtractId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ExtractServis">
+          <End Role="Extracts" Type="Self.Extracts" Multiplicity="1" />
+          <End Role="Servises" Type="Self.Servises" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Extracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Servises">
+              <PropertyRef Name="ExtractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RenterExtract">
+          <End Role="Renters" Type="Self.Renters" Multiplicity="1" />
+          <End Role="Extracts" Type="Self.Extracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Renters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Extracts">
+              <PropertyRef Name="RenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RenterPrivilege">
+          <End Role="Renters" Type="Self.Renters" Multiplicity="1" />
+          <End Role="Privileges" Type="Self.Privileges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Renters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Privileges">
+              <PropertyRef Name="RenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ARMdatabaseModelStoreContainer">
+          <EntitySet Name="Extracts" EntityType="Self.Extracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Privileges" EntityType="Self.Privileges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Renters" EntityType="Self.Renters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servises" EntityType="Self.Servises" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ExtractServis" Association="Self.FK_ExtractServis">
+            <End Role="Extracts" EntitySet="Extracts" />
+            <End Role="Servises" EntitySet="Servises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RenterExtract" Association="Self.FK_RenterExtract">
+            <End Role="Renters" EntitySet="Renters" />
+            <End Role="Extracts" EntitySet="Extracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RenterPrivilege" Association="Self.FK_RenterPrivilege">
+            <End Role="Renters" EntitySet="Renters" />
+            <End Role="Privileges" EntitySet="Privileges" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ARMdatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Extract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Servise" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="price" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="With_privilege" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="id_renter" Type="Int32" />
+          <NavigationProperty Name="Servis" Relationship="ARMdatabaseModel.ExtractServis" FromRole="Extract" ToRole="Servis" />
+          <NavigationProperty Name="Renter" Relationship="ARMdatabaseModel.RenterExtract" FromRole="Extract" ToRole="Renter" />
+          <Property Name="RenterId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Privilege">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="Procent" Type="Double" />
+          <Property Name="id_renter" Type="Int32" />
+          <NavigationProperty Name="Renter" Relationship="ARMdatabaseModel.RenterPrivilege" FromRole="Privilege" ToRole="Renter" />
+          <Property Name="RenterId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Renter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_name" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="L_name" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="Adres" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="Privileges" Type="Boolean" />
+          <Property Name="Debtor" Type="Boolean" />
+          <NavigationProperty Name="Privileges1" Relationship="ARMdatabaseModel.RenterPrivilege" FromRole="Renter" ToRole="Privilege" />
+          <NavigationProperty Name="Extracts" Relationship="ARMdatabaseModel.RenterExtract" FromRole="Renter" ToRole="Extract" />
+        </EntityType>
+        <EntityType Name="Servis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="RenterId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Extract" Relationship="ARMdatabaseModel.ExtractServis" FromRole="Servis" ToRole="Extract" />
+          <Property Name="ExtractId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ARMdatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Extracts" EntityType="Self.Extract" />
+          <EntitySet Name="Privileges" EntityType="Self.Privilege" />
+          <EntitySet Name="Renters" EntityType="Self.Renter" />
+          <EntitySet Name="Servises" EntityType="Self.Servis" />
+          <AssociationSet Name="RenterPrivilege" Association="ARMdatabaseModel.RenterPrivilege">
+            <End Role="Renter" EntitySet="Renters" />
+            <End Role="Privilege" EntitySet="Privileges" />
+          </AssociationSet>
+          <AssociationSet Name="ExtractServis" Association="ARMdatabaseModel.ExtractServis">
+            <End Role="Extract" EntitySet="Extracts" />
+            <End Role="Servis" EntitySet="Servises" />
+          </AssociationSet>
+          <AssociationSet Name="RenterExtract" Association="ARMdatabaseModel.RenterExtract">
+            <End Role="Renter" EntitySet="Renters" />
+            <End Role="Extract" EntitySet="Extracts" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="RenterPrivilege">
+          <End Type="ARMdatabaseModel.Renter" Role="Renter" Multiplicity="1" />
+          <End Type="ARMdatabaseModel.Privilege" Role="Privilege" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Renter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Privilege">
+              <PropertyRef Name="RenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ExtractServis">
+          <End Type="ARMdatabaseModel.Extract" Role="Extract" Multiplicity="1" />
+          <End Type="ARMdatabaseModel.Servis" Role="Servis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Extract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Servis">
+              <PropertyRef Name="ExtractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RenterExtract">
+          <End Type="ARMdatabaseModel.Renter" Role="Renter" Multiplicity="1" />
+          <End Type="ARMdatabaseModel.Extract" Role="Extract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Renter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Extract">
+              <PropertyRef Name="RenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ARMdatabaseModelStoreContainer" CdmEntityContainer="ARMdatabaseEntities">
+    <EntitySetMapping Name="Extracts">
+      <EntityTypeMapping TypeName="IsTypeOf(ARMdatabaseModel.Extract)">
+        <MappingFragment StoreEntitySet="Extracts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Servise" ColumnName="Servise" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="With_privilege" ColumnName="With_privilege" />
+          <ScalarProperty Name="id_renter" ColumnName="id_renter" />
+          <ScalarProperty Name="RenterId" ColumnName="RenterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Privileges">
+      <EntityTypeMapping TypeName="IsTypeOf(ARMdatabaseModel.Privilege)">
+        <MappingFragment StoreEntitySet="Privileges">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Procent" ColumnName="Procent" />
+          <ScalarProperty Name="id_renter" ColumnName="id_renter" />
+          <ScalarProperty Name="RenterId" ColumnName="RenterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Renters">
+      <EntityTypeMapping TypeName="IsTypeOf(ARMdatabaseModel.Renter)">
+        <MappingFragment StoreEntitySet="Renters">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="F_name" ColumnName="F_name" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="L_name" ColumnName="L_name" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Privileges" ColumnName="Privileges" />
+          <ScalarProperty Name="Debtor" ColumnName="Debtor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Servises">
+      <EntityTypeMapping TypeName="IsTypeOf(ARMdatabaseModel.Servis)">
+        <MappingFragment StoreEntitySet="Servises">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="RenterId" ColumnName="RenterId" />
+          <ScalarProperty Name="ExtractId" ColumnName="ExtractId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
