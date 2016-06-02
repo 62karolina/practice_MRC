@@ -6,21 +6,27 @@
 <h2>Index</h2>
 
 
-@foreach (var item in Model)
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Фамилия</th>
-                <th>Имя</th>
-                <th>Отчество</th>
-                <th>Адрес</th>
-                <th>Льготы</th>
-                <th>Задолжник</th>
-            </tr>
-        </thead>
-        <tbody>
+@Html.ActionLink("Добавление информации о квартиросъемщике", "NewPerson", new { @class = "label label-primary" })
+@Html.ActionLink("Изменить тарифы", "Index", "Price", new { @class = "label label-primary" })                    
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Адрес</th>
+            <th>Льготы</th>
+            <th>Задолжник</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+
+
             <tr>
                 <td>@item.Id</td>
                 <td>@item.F_name</td>
@@ -30,9 +36,10 @@
                 <td>@item.Privileges</td>
                 <td>@item.Debtor</td>
             </tr>
-        </tbody>
+    }
+    </tbody>  
     </table>
-}
+ 
 
 
 

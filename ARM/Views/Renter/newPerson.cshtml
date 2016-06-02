@@ -1,0 +1,47 @@
+﻿@model ARM.Models.Renter
+@{
+    ViewBag.Title = "newPerson";
+}
+
+@Html.ActionLink("Назад", "Index", new { @class = "label label-primary" })
+
+
+<h2>Информация о квартиросъемщике</h2>
+
+
+@using (Html.BeginForm())
+{
+    <h3>Данные</h3>
+    <div class="form-group">
+        <label>Фамилия:</label>
+        @Html.EditorFor(m => m.F_name)
+
+        <label>Имя:</label>
+        @Html.EditorFor(m => m.Name)
+
+        <label>Отчество:</label>
+        @Html.EditorFor(x => x.L_name, new { @class = "form-control" })
+
+        <label>Адрес:</label>
+        @Html.EditorFor(x => x.Adres, new { @class = "form-control" })
+
+        <div class="checkbox">
+            <label>
+                Задолжник
+                @Html.EditorFor(x => x.Debtor)
+
+                Льготы
+                @Html.EditorFor(x => x.Privileges)
+                
+
+            </label>
+            <div class="text-center">
+                <input class="btn btn-primary" type="submit" value="Сохранить" />
+            </div>
+        </div>
+
+   
+    </div>
+
+
+}
