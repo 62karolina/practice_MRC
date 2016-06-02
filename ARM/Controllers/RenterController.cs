@@ -1,4 +1,5 @@
 ﻿using ARM.Models;
+using ARM.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,13 @@ namespace ARM.Controllers
 {
     public class RenterController : Controller
     {
-        ARMdatabaseEntities db;
+        ARMContext db;
 
 
         // GET: Renter
         public ActionResult Index()
         {
-            db = new ARMdatabaseEntities();
+            db = new ARMContext();
             
             return View(db.Renters);
 

@@ -146,17 +146,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\NewModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NewModel.edmx</DependentUpon>
-      <LastGenOutput>NewModel.Context.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\NewModel.edmx.sql" />
-    <Content Include="Models\NewModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NewModel.edmx</DependentUpon>
-      <LastGenOutput>NewModel.cs</LastGenOutput>
-    </Content>
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -167,13 +157,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <EntityDeploy Include="Models\NewModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NewModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\NewModel.edmx.diagram">
-      <DependentUpon>NewModel.edmx</DependentUpon>
-    </Content>
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -184,7 +167,9 @@
     <Content Include="scripts\jquery-1.9.1.js" />
     <Content Include="scripts\jquery-1.9.1.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -194,34 +179,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Extract.cs">
-      <DependentUpon>NewModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Extract.cs" />
     <Compile Include="Models\Interface.cs" />
-    <Compile Include="Models\NewModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NewModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NewModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NewModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NewModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NewModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Privilege.cs">
-      <DependentUpon>NewModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Renter.cs">
-      <DependentUpon>NewModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Servis.cs">
-      <DependentUpon>NewModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\ARMContext.cs" />
+    <Compile Include="Models\Privilege.cs" />
+    <Compile Include="Models\projectModel.cs" />
+    <Compile Include="Models\Renter.cs" />
+    <Compile Include="Models\Servis.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -236,6 +200,7 @@
     <Content Include="Views\Renter\Index.cshtml" />
     <Content Include="Views\Renter\newPerson.cshtml" />
     <Content Include="Views\Price\Index.cshtml" />
+    <Content Include="Views\Price\_Price.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

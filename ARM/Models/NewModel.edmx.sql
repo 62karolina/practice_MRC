@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/01/2016 20:20:55
+-- Date Created: 06/02/2016 14:14:52
 -- Generated from EDMX file: D:\Практика\ARM\ARM\Models\NewModel.edmx
 -- --------------------------------------------------
 
@@ -17,19 +17,28 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_ExtractServis]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Servises] DROP CONSTRAINT [FK_ExtractServis];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RenterExtract]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Extracts] DROP CONSTRAINT [FK_RenterExtract];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RenterPrivilege]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Privileges] DROP CONSTRAINT [FK_RenterPrivilege];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Extract]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Extract];
+IF OBJECT_ID(N'[dbo].[Extracts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Extracts];
 GO
-IF OBJECT_ID(N'[dbo].[Privilege]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Privilege];
+IF OBJECT_ID(N'[dbo].[Privileges]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Privileges];
 GO
-IF OBJECT_ID(N'[dbo].[Renter]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Renter];
+IF OBJECT_ID(N'[dbo].[Renters]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Renters];
 GO
 IF OBJECT_ID(N'[dbo].[Servises]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Servises];
@@ -76,9 +85,7 @@ GO
 CREATE TABLE [dbo].[Servises] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nchar(150)  NULL,
-    [Price] decimal(19,4)  NULL,
-    [RenterId] int  NOT NULL,
-    [ExtractId] int  NOT NULL
+    [Price] decimal(19,4)  NULL
 );
 GO
 
@@ -127,21 +134,6 @@ GO
 CREATE INDEX [IX_FK_RenterPrivilege]
 ON [dbo].[Privileges]
     ([RenterId]);
-GO
-
--- Creating foreign key on [ExtractId] in table 'Servises'
-ALTER TABLE [dbo].[Servises]
-ADD CONSTRAINT [FK_ExtractServis]
-    FOREIGN KEY ([ExtractId])
-    REFERENCES [dbo].[Extracts]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ExtractServis'
-CREATE INDEX [IX_FK_ExtractServis]
-ON [dbo].[Servises]
-    ([ExtractId]);
 GO
 
 -- Creating foreign key on [RenterId] in table 'Extracts'

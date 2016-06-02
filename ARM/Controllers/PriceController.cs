@@ -9,11 +9,28 @@ namespace ARM.Controllers
 {
     public class PriceController : Controller
     {
-        ARMdatabaseEntities price;
+        ARMContext price;
         // GET: Price
         public ActionResult Index(Servis model)
         {
-            price = new ARMdatabaseEntities();
+            price = new ARMContext();
+
+            
+            return View(price.Servises);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult _Price()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult _Price(Servis model)
+        {
+           
 
             ProjectRepository pr = new ProjectRepository();
 
@@ -23,10 +40,10 @@ namespace ARM.Controllers
                 Price = model.Price
 
             };
-            pr.SaveRenters(pri);
-            return View();
+            pr.SaveServ(pri);
+            return RedirectToAction("Index", "Price", new { pri });
         }
 
-        
+
     }
 }

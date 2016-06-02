@@ -43,8 +43,6 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="RenterId" ColumnName="RenterId" />
-          <ScalarProperty Name="ExtractId" ColumnName="ExtractId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

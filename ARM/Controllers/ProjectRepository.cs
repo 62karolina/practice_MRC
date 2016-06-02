@@ -1,4 +1,5 @@
 ﻿using ARM.Models;
+using ARM.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace ARM.Controllers
 {
     public class ProjectRepository : Interface
     {
-        private ARMdatabaseEntities context = new ARMdatabaseEntities();
+        private ARMContext context = new ARMContext();
 
         public IQueryable<Extract> extr
         {
@@ -54,9 +55,9 @@ namespace ARM.Controllers
             context.SaveChanges();
         }
 
-        public void DeleteServ(Servis serv)
+        public void DeleteServ(Servis servis)
         {
-            context.Servises.Remove(serv);
+            context.Servises.Remove(servis);
             context.SaveChanges();
         }
 
@@ -99,11 +100,11 @@ namespace ARM.Controllers
             context.SaveChanges();
         }
 
-        public void SaveServ(Servis serv)
+        public void SaveServ(Servis servis)
         {
-            if (serv.Id == 0)
+            if (servis.Id == 0)
             {
-                context.Servises.Add(serv);
+                context.Servises.Add(servis);
             }
             else
             {

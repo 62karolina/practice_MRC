@@ -14,8 +14,8 @@ namespace ARM.Models
         IQueryable<Privilege> priv { get; }
         void SaveRenters(Renter renter);
         void DeleteRenters(Renter renter);
-        void SaveServ(Servis serv);
-        void DeleteServ(Servis serv);
+        void SaveServ(Servis servis);
+        void DeleteServ(Servis servis);
         void SaveExtr(Extract extract);
         void DeleteExtr(Extract extract);
         void SavePriv(Privilege privilege);

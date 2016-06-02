@@ -9,7 +9,6 @@
     <Property Name="price" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="With_privilege" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
     <Property Name="id_renter" Type="Int32" />
-    <NavigationProperty Name="Servis" Relationship="ARMdatabaseModel.ExtractServis" FromRole="Extract" ToRole="Servis" />
     <NavigationProperty Name="Renter" Relationship="ARMdatabaseModel.RenterExtract" FromRole="Extract" ToRole="Renter" />
     <Property Name="RenterId" Type="Int32" Nullable="false" />
   </EntityType>
@@ -45,9 +44,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
     <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
-    <Property Name="RenterId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Extract" Relationship="ARMdatabaseModel.ExtractServis" FromRole="Servis" ToRole="Extract" />
-    <Property Name="ExtractId" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityContainer Name="ARMdatabaseEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Extracts" EntityType="Self.Extract" />
@@ -57,10 +53,6 @@
     <AssociationSet Name="RenterPrivilege" Association="ARMdatabaseModel.RenterPrivilege">
       <End Role="Renter" EntitySet="Renters" />
       <End Role="Privilege" EntitySet="Privileges" />
-    </AssociationSet>
-    <AssociationSet Name="ExtractServis" Association="ARMdatabaseModel.ExtractServis">
-      <End Role="Extract" EntitySet="Extracts" />
-      <End Role="Servis" EntitySet="Servises" />
     </AssociationSet>
     <AssociationSet Name="RenterExtract" Association="ARMdatabaseModel.RenterExtract">
       <End Role="Renter" EntitySet="Renters" />
@@ -76,18 +68,6 @@
       </Principal>
       <Dependent Role="Privilege">
         <PropertyRef Name="RenterId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ExtractServis">
-    <End Type="ARMdatabaseModel.Extract" Role="Extract" Multiplicity="1" />
-    <End Type="ARMdatabaseModel.Servis" Role="Servis" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Extract">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Servis">
-        <PropertyRef Name="ExtractId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -1,4 +1,4 @@
-﻿@model List<ARM.Models.Servis>
+﻿@model ARM.Models.Servis
 
 @{
     ViewBag.Title = "Index";
@@ -6,14 +6,15 @@
 
 <h2>Цены на услуги</h2>
 
+
 @using (Html.BeginForm())
 {
     <div class="form-group">
         <label>Название:</label>
-        @Html.EditorFor(x => x.Name)
+        @Html.EditorFor(x => x.Name, new { @class = "form-control" })
 
         <label>Цена</label>
-        @Html.EditorFor(x => x.Price)
+        @Html.LabelFor(x => x.Price, new { @class = "form-control" })
 
         <div class="text-center">
             <input class="btn btn-primary" type="submit" value="Сохранить" />
@@ -23,22 +24,8 @@
 
 
 }
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Название</th>
-            <th>Цена</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Price</td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+
+<div>
+    @Html.Partial("_Price")
+</div>
