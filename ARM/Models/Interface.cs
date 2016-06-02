@@ -9,9 +9,17 @@ namespace ARM.Models
     interface Interface
     {
         IQueryable<Renter> rent { get; }
-      //  IQueryable<Servis> serv { get; }
+        IQueryable<Servis> serv { get; }
+        IQueryable<Extract> extr { get; }
+        IQueryable<Privilege> priv { get; }
         void SaveRenters(Renter renter);
         void DeleteRenters(Renter renter);
-        
+        void SaveServ(Servis serv);
+        void DeleteServ(Servis serv);
+        void SaveExtr(Extract extract);
+        void DeleteExtr(Extract extract);
+        void SavePriv(Privilege privilege);
+        void DeletePriv(Privilege privilege);
+
     }
 }
