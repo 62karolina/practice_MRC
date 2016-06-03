@@ -29,11 +29,11 @@ namespace ARM.Controllers
             get { return context.Renters; }
         }
 
-        public IQueryable<Servis> serv
+        public IQueryable<Servises> serv
         {
             get
             {
-                return context.Servises;
+                return context.Servis;
             }
         }
 
@@ -55,9 +55,9 @@ namespace ARM.Controllers
             context.SaveChanges();
         }
 
-        public void DeleteServ(Servis servis)
+        public void DeleteServ(Servises servis)
         {
-            context.Servises.Remove(servis);
+            context.Servis.Remove(servis);
             context.SaveChanges();
         }
 
@@ -100,11 +100,11 @@ namespace ARM.Controllers
             context.SaveChanges();
         }
 
-        public void SaveServ(Servis servis)
+        public void SaveServ(Servises servis)
         {
             if (servis.Id == 0)
             {
-                context.Servises.Add(servis);
+                context.Servis.Add(servis);
             }
             else
             {

@@ -19,10 +19,14 @@ namespace ARM.Controllers
         public ActionResult Index()
         {
             db = new ARMContext();
+
+            
             
             return View(db.Renters);
 
         }
+
+        
 
       
         [AllowAnonymous]
@@ -51,6 +55,8 @@ namespace ARM.Controllers
                 Privileges = model.Privileges
             };
             pr.SaveRenters(person);
+
+            
 
             return RedirectToAction("Index", "Renter", new { person });
         }

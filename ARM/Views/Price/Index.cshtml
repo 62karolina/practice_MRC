@@ -1,31 +1,33 @@
-﻿@model ARM.Models.Servis
-
+﻿@model IEnumerable<ARM.Models.Servises>
 @{
     ViewBag.Title = "Index";
+ 
 }
+
+@Html.ActionLink("Назад", "Index", "Renter", new { @class = "label label-primary" })
 
 <h2>Цены на услуги</h2>
 
 
-@using (Html.BeginForm())
-{
-    <div class="form-group">
-        <label>Название:</label>
-        @Html.EditorFor(x => x.Name, new { @class = "form-control" })
+@Html.ActionLink("Изменить цены", "Price", "Price",new { @class = "label label-primary" })
 
-        <label>Цена</label>
-        @Html.LabelFor(x => x.Price, new { @class = "form-control" })
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Название</th>
+                <th>Цена</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-        <div class="text-center">
-            <input class="btn btn-primary" type="submit" value="Сохранить" />
-        </div>
-
-    </div>
-
-
-}
-
-
-<div>
-    @Html.Partial("_Price")
-</div>

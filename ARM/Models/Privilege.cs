@@ -10,9 +10,8 @@ namespace ARM.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public Nullable<double> Procent { get; set; }
-        public Nullable<int> id_renter { get; set; }
+        public Nullable<bool> Privileges { get; set; }
         public int RenterId { get; set; }
 
-        public virtual Renter Renter { get; set; }
     }
 }

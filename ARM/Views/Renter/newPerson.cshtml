@@ -3,7 +3,7 @@
     ViewBag.Title = "newPerson";
 }
 
-@Html.ActionLink("Назад", "Index", new { @class = "label label-primary" })
+@Html.ActionLink("Назад", "Index", "Renter", new { @class = "label label-primary" })
 
 
 <h2>Информация о квартиросъемщике</h2>
@@ -32,7 +32,9 @@
 
                 Льготы
                 @Html.EditorFor(x => x.Privileges)
-                
+                @if (checked(true)){ 
+                    
+                }
 
             </label>
             <div class="text-center">

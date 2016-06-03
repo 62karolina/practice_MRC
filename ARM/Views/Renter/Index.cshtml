@@ -3,12 +3,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Квартиросъемщики</h2>
 
 
 @Html.ActionLink("Добавление информации о квартиросъемщике", "NewPerson", "Renter", new { @class = "label label-primary" })
-@Html.ActionLink("Изменить тарифы", "Index", "Price", new { @class = "label label-primary" })                    
-
+@Html.ActionLink("Изменить тарифы", "Index", "Price", new { @class = "label label-primary" })       
+@*Html.ActionLink("Просмотр льгтников", "Index", "Privileges", new { @class = "label label-primary" })                *@
+<a href="~/Privileges/Index">Просмотр льготников</a>
 
 <table class="table">
     <thead>
@@ -38,11 +39,7 @@
             </tr>
     }
     </tbody>  
-    </table>
+</table>
  
 
-
-
-
-</body>
 

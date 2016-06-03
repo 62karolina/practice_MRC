@@ -1,0 +1,21 @@
+﻿@model ARM.Models.Servises
+
+
+@Html.ActionLink("Назад", "Index", "Price",new { @class = "label label-primary" })
+
+@using (Html.BeginForm())
+{
+<div class="form-group">
+    <label>Название:</label>
+    @Html.EditorFor(x => x.Name, new { @class = "form-control" })
+
+    <label>Цена</label>
+    @Html.EditorFor(x => x.Price, new { @class = "form-control" })
+
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="Сохранить" />
+    </div>
+
+</div>
+}
+
