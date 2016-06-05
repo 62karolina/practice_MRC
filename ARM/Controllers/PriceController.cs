@@ -31,17 +31,17 @@ namespace ARM.Controllers
         }
 
         [HttpPost]
-        public ActionResult Price(Servises model)
+        public ActionResult Price(Extract model)
         {
             ProjectRepository pr = new ProjectRepository();
 
-            var pri = new Servises
+            var pri = new Extract
             {
-                Name = model.Name,
-                Price = model.Price
+                Servise = model.Servise,
+                price = model.price
 
             };
-            pr.SaveServ(pri);
+            pr.SaveExtr(pri);
             return RedirectToAction("Index", "Price", new { pri }); 
         }
 

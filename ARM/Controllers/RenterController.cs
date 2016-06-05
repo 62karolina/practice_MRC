@@ -2,6 +2,7 @@
 using ARM.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -16,19 +17,57 @@ namespace ARM.Controllers
 
 
         // GET: Renter
+        [HttpGet]
         public ActionResult Index()
         {
             db = new ARMContext();
-
-            
-            
+           
             return View(db.Renters);
 
         }
 
-        
+        public ActionResult Delete(int id)
+        {
+            Renter b = new Renter { Id = id };
+            db.Entry(b).State = EntityState.Deleted;
+            db.SaveChanges();
 
-      
+            return RedirectToAction("Index", "Renter");
+        }
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Renter b = db.Renters.Find(id);
+            if (b == null)
+            {
+                return HttpNotFound();
+            }
+            return View(b);
+        }
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Renter b = db.Renters.Find(id);
+            if (b == null)
+            {
+                return HttpNotFound();
+            }
+            db.Renters.Remove(b);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Renter");
+        }
+
+
+
+
         [AllowAnonymous]
         [HttpGet]
         public ActionResult newPerson()

@@ -20,6 +20,8 @@ namespace ARM.Models
         public string Adres { get; set; }
         public Nullable<bool> Privileges { get; set; }
         public Nullable<bool> Debtor { get; set; }
+        public string NamePriv { get; set; }
+        public Nullable<double> Procent { get; set; }
 
         public virtual ICollection<Extract> Extracts { get; set; }
     }

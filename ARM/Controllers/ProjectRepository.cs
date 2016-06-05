@@ -16,26 +16,14 @@ namespace ARM.Controllers
             get { return context.Extracts; }
         }
 
-        public IQueryable<Privilege> priv
-        {
-            get
-            {
-                return context.Privileges;
-            }
-        }
+
 
         public IQueryable<Renter> rent
         {
             get { return context.Renters; }
         }
 
-        public IQueryable<Servises> serv
-        {
-            get
-            {
-                return context.Servis;
-            }
-        }
+
 
         public void DeleteExtr(Extract extract)
         {
@@ -43,11 +31,7 @@ namespace ARM.Controllers
             context.SaveChanges();
         }
 
-        public void DeletePriv(Privilege privilege)
-        {
-            context.Privileges.Remove(privilege);
-            context.SaveChanges();
-        }
+
 
         public void DeleteRenters(Renter renter)
         {
@@ -55,11 +39,7 @@ namespace ARM.Controllers
             context.SaveChanges();
         }
 
-        public void DeleteServ(Servises servis)
-        {
-            context.Servis.Remove(servis);
-            context.SaveChanges();
-        }
+
 
         public void SaveExtr(Extract extract)
         {
@@ -74,18 +54,7 @@ namespace ARM.Controllers
             context.SaveChanges();
         }
 
-        public void SavePriv(Privilege privilege)
-        {
-            if (privilege.Id == 0)
-            {
-                context.Privileges.Add(privilege);
-            }
-            else
-            {
-                context.Entry(privilege).State = System.Data.Entity.EntityState.Modified;
-            }
-            context.SaveChanges();
-        }
+
 
         public void SaveRenters(Renter renter)
         {
@@ -100,17 +69,6 @@ namespace ARM.Controllers
             context.SaveChanges();
         }
 
-        public void SaveServ(Servises servis)
-        {
-            if (servis.Id == 0)
-            {
-                context.Servis.Add(servis);
-            }
-            else
-            {
-                context.Entry(serv).State = System.Data.Entity.EntityState.Modified;
-            }
-            context.SaveChanges();
-        }
+        
     }
 }

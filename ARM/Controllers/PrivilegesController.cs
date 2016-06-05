@@ -12,7 +12,7 @@ namespace ARM.Controllers
         ARMContext armcontext;
 
         // GET: Privileges
-        public ActionResult Index(Renter renter, Privilege priv)
+        public ActionResult Index(Renter renter)
         {
             armcontext = new ARMContext();
             TrueFalse tfs = new TrueFalse();
@@ -25,22 +25,30 @@ namespace ARM.Controllers
             //var trueFalse = armcontext.TrueFalses.Where(m => m.FTrue == tfs.FTrue).FirstOrDefault();
             var trueFalse = armcontext.TrueFalses.FirstOrDefault(m => m.FTrue == true);
             
-            if (privil.Privileges == trueFalse.FTrue)
+            if(renter.Privileges == null)
             {
-                Renter user = armcontext.Renters.FirstOrDefault(m => m.Id == renter.Id);
-
-                var info = new Privilege
+                return View(armcontext.Renters);
+            }
+            else
+            {
+                if (privil.Privileges == trueFalse.FTrue)
                 {
-                    Id = priv.Id,
-                    RenterId = user.Id
-                };
+                    Renter user = armcontext.Renters.FirstOrDefault(m => m.Id == renter.Id);
 
-                pr.SavePriv(info);
+                    var info = new Renter
+                    {
+                        NamePriv = renter.NamePriv,
+                        Procent = renter.Procent
+                    };
+
+                    pr.SaveRenters(info);
+                }
+            
                    
                      
            
             }
-            return View(armcontext.Privileges);
+            return View(armcontext.Renters);
         }
 
         

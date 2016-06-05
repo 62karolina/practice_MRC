@@ -146,7 +146,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\NewModel.edmx.sql" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -173,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ExtractController.cs" />
     <Compile Include="Controllers\PriceController.cs" />
     <Compile Include="Controllers\PrivilegesController.cs" />
     <Compile Include="Controllers\ProjectRepository.cs" />
@@ -183,7 +183,6 @@
     <Compile Include="Models\Extract.cs" />
     <Compile Include="Models\Interface.cs" />
     <Compile Include="Models\ARMContext.cs" />
-    <Compile Include="Models\Privilege.cs" />
     <Compile Include="Models\Renter.cs" />
     <Compile Include="Models\Servises.cs" />
     <Compile Include="Models\TrueFalse.cs" />
@@ -203,6 +202,7 @@
     <Content Include="Views\Price\Index.cshtml" />
     <Content Include="Views\Price\Price.cshtml" />
     <Content Include="Views\Privileges\Index.cshtml" />
+    <Content Include="Views\Extract\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

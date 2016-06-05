@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ARM.Models.Extract>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Жировка для жильца</h2>
+
+
+@using (Html.BeginForm())
+{
+    <h3>Данные</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Услуга</th>
+                <th>Цена</th>
+                <th>Со льготами</th>
+           
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Servise</td>
+                    <td>@item.price</td>
+                    <td>@item.With_privilege</td>
+     
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+}

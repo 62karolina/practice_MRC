@@ -36,6 +36,8 @@
                 <td>@item.Adres</td>
                 <td>@item.Privileges</td>
                 <td>@item.Debtor</td>
+                <td><input type="submit" value="Удалить" /></td>
+                <td>@Html.ActionLink("Жировка","Index", "Extract", new { id = item.Id }, null)</td>
             </tr>
     }
     </tbody>  
