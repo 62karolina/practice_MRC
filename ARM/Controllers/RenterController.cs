@@ -1,8 +1,6 @@
 ﻿using ARM.Models;
-using ARM.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -17,57 +15,19 @@ namespace ARM.Controllers
 
 
         // GET: Renter
-        [HttpGet]
         public ActionResult Index()
         {
             db = new ARMContext();
-           
+
+            
+            
             return View(db.Renters);
 
         }
 
-        public ActionResult Delete(int id)
-        {
-            Renter b = new Renter { Id = id };
-            db.Entry(b).State = EntityState.Deleted;
-            db.SaveChanges();
+        
 
-            return RedirectToAction("Index", "Renter");
-        }
-        [HttpGet]
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return HttpNotFound();
-            }
-            Renter b = db.Renters.Find(id);
-            if (b == null)
-            {
-                return HttpNotFound();
-            }
-            return View(b);
-        }
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int? id)
-        {
-            if (id == null)
-            {
-                return HttpNotFound();
-            }
-            Renter b = db.Renters.Find(id);
-            if (b == null)
-            {
-                return HttpNotFound();
-            }
-            db.Renters.Remove(b);
-            db.SaveChanges();
-            return RedirectToAction("Index", "Renter");
-        }
-
-
-
-
+      
         [AllowAnonymous]
         [HttpGet]
         public ActionResult newPerson()
@@ -100,11 +60,48 @@ namespace ARM.Controllers
             return RedirectToAction("Index", "Renter", new { person });
         }
 
-            
-            
-           
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            ProjectRepository pr = new ProjectRepository();
+            Renter deletedGame = pr.DeleteRenters(id);
+            if (deletedGame != null)
+            {
+                TempData["message"] = string.Format("Удалено");
+            }
+            return RedirectToAction("Index");
+        }
 
         
+
+        [HttpGet]
+        public ViewResult Edit(int id)
+        {
+            db = new ARMContext();
+            Renter game = db.Renters.FirstOrDefault(g => g.Id == id);
+            return View(game);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Renter game)
+        {
+            db = new ARMContext();
+            ProjectRepository pr = new ProjectRepository();
+            if (ModelState.IsValid)
+            {
+                pr.SaveRenters(game);
+                db.SaveChanges();
+                TempData["message"] = string.Format("Сохранено", game.Name);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                // Что-то не так со значениями данных
+                return View(game);
+            }
+        }
+
+
 
     }
 }

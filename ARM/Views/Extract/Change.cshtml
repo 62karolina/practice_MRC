@@ -1,0 +1,17 @@
+﻿@model ARM.Models.Extract
+
+@Html.ActionLink("Назад", "Index", "Extract", new { @class = "label label-primary" })
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <label>ID квартиросъемщика:</label>
+        @Html.EditorFor(x => x.RenterId, new { @class = "form-control" })
+        <label>Льготы</label>
+        @Html.EditorFor(x => x.With_privilege, new { @class = "form-control" })
+        <div class="text-center">
+            <input class="btn btn-primary" type="submit" value="Сохранить" />
+        </div>
+    </div>
+}
+
+

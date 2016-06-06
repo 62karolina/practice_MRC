@@ -7,9 +7,11 @@
 
 
 @Html.ActionLink("Добавление информации о квартиросъемщике", "NewPerson", "Renter", new { @class = "label label-primary" })
-@Html.ActionLink("Изменить тарифы", "Index", "Price", new { @class = "label label-primary" })       
+@*@Html.ActionLink("Изменить тарифы", "Index", "Price", new { @class = "label label-primary" })*@       
 @*Html.ActionLink("Просмотр льгтников", "Index", "Privileges", new { @class = "label label-primary" })                *@
 <a href="~/Privileges/Index">Просмотр льготников</a>
+<a href="~/Price/Index">Изменить тарифы</a>
+
 
 <table class="table">
     <thead>
@@ -36,8 +38,9 @@
                 <td>@item.Adres</td>
                 <td>@item.Privileges</td>
                 <td>@item.Debtor</td>
-                <td><input type="submit" value="Удалить" /></td>
-                <td>@Html.ActionLink("Жировка","Index", "Extract", new { id = item.Id }, null)</td>
+                <td>@Html.ActionLink("Редактировать", "Edit", "Renter", new { id = item.Id }, null)</td>
+                <td>@Html.ActionLink("Удалить", "Delete", "Renter", new { id = item.Id }, null)</td>
+                <td>@Html.ActionLink("Жировка", "Index", "Extract", new { id = item.Id }, null)</td>
             </tr>
     }
     </tbody>  

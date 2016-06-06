@@ -18,7 +18,7 @@ namespace ARM.Controllers
             price = new ARMContext();
 
 
-            return View(price.Servis);
+            return View(price.Extracts);
         }
 
   

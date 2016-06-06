@@ -1,5 +1,4 @@
 ﻿using ARM.Models;
-using ARM.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +16,10 @@ namespace ARM.Controllers
         }
 
 
-
         public IQueryable<Renter> rent
         {
             get { return context.Renters; }
         }
-
 
 
         public void DeleteExtr(Extract extract)
@@ -32,13 +29,18 @@ namespace ARM.Controllers
         }
 
 
-
-        public void DeleteRenters(Renter renter)
+        public Renter DeleteRenters(int id)
         {
-            context.Renters.Remove(renter);
-            context.SaveChanges();
+            Renter dbEntry = context.Renters.Find(id);
+            if (dbEntry != null)
+            {
+                context.Renters.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+            //context.Renters.Remove(renter);
+            //context.SaveChanges();
         }
-
 
 
         public void SaveExtr(Extract extract)
@@ -55,7 +57,6 @@ namespace ARM.Controllers
         }
 
 
-
         public void SaveRenters(Renter renter)
         {
             if (renter.Id == 0)
@@ -69,6 +70,5 @@ namespace ARM.Controllers
             context.SaveChanges();
         }
 
-        
     }
 }

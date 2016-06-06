@@ -11,10 +11,10 @@ namespace ARM.Models
         IQueryable<Renter> rent { get; }
         IQueryable<Extract> extr { get; }
         void SaveRenters(Renter renter);
-        void DeleteRenters(Renter renter);
+        Renter DeleteRenters(int id);
         void SaveExtr(Extract extract);
         void DeleteExtr(Extract extract);
-
+       
 
     }
 }

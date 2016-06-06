@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ARM.Models.Renter>
+﻿@model IEnumerable<ARM.Models.Privilege>
 @{
     ViewBag.Title = "Index";
 }
@@ -19,8 +19,9 @@
         {
             <tr>
                 <td>@item.Id</td>
-                <td>@item.NamePriv</td>
+                <td>@item.Name</td>
                 <td>@item.Procent</td>
+                <td>@item.RenterId</td>
             </tr>
         }
     </tbody>

@@ -1,4 +1,4 @@
-﻿@model ARM.Models.Servises
+﻿@model ARM.Models.Extract
 
 
 @Html.ActionLink("Назад", "Index", "Price",new { @class = "label label-primary" })
@@ -7,10 +7,10 @@
 {
 <div class="form-group">
     <label>Название:</label>
-    @Html.EditorFor(x => x.Name, new { @class = "form-control" })
+    @Html.EditorFor(x => x.Servise, new { @class = "form-control" })
 
     <label>Цена</label>
-    @Html.EditorFor(x => x.Price, new { @class = "form-control" })
+    @Html.EditorFor(x => x.price, new { @class = "form-control" })
 
     <div class="text-center">
         <input class="btn btn-primary" type="submit" value="Сохранить" />
